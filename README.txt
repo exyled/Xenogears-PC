@@ -1,7 +1,5 @@
 Xenogears - native build. One program, no runtime to install.
 
-Future versions would include graphical upgrades (IE a remaster) and then integrating the lost sections of the second disc. However, I'm fully willing to let someone else do that as well.
-
 Run Xenogears.exe. The game data is in the GameData folder beside it.
 Saves are kept in the Saves folder (card1.mcd; a card2.mcd there is the second memory card slot).
 
