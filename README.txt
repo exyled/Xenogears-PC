@@ -1,16 +1,26 @@
 Xenogears - native build. One program, no runtime to install.
 
-HOW TO DOWNLOAD (please read): do not use the green Code > Download ZIP button.
-Three of the movie files (GameData/streams/0014.str, 4161.str and 4165.str) are too large for a normal
-download and are stored with Git LFS. A ZIP download leaves them out, and those movies will not play.
-Clone the repository instead, with Git and Git LFS installed (https://git-lfs.com):
+GAME DATA (not included)
+This package contains the player only. It does not contain the game's data, which you take off your own
+discs once. You need your own copy of both discs of the game (the North American release, serials SLUS-00664
+and SLUS-00669; the Japanese serials SLPS-01160 and SLPS-01161 are read as well).
 
-    git lfs install
-    git clone https://github.com/exyled/Xenogears-PC
+1. Make a raw image of each disc: a .bin file with 2352 bytes to the sector (a .bin/.cue pair from any
+   disc-imaging tool; a plain .iso has no movie sectors and will not give you the movies).
+2. Put Xenogears.exe in its own folder and run, from a command prompt in that folder:
 
-The clone contains everything, including the three large files.
+       Xenogears.exe --extract "Disc 1.bin" "Disc 2.bin"
 
-Run Xenogears.exe. The game data is in the GameData folder beside it.
+   This writes a GameData folder beside the program (about 1.2 GB) holding the files of both discs as one
+   data set. A different folder can be chosen with --out <folder>. It takes a few minutes. Disc 2 is
+   optional (without it the second half's movies are missing).
+3. Run Xenogears.exe. The game finds GameData beside it.
+
+The extracting is the program's own: it reads the disc's file index (sector 24) and its section table
+(sector 40), writes every entry to GameData/archive/NNNN.bin and the movies and sound to GameData/streams/NNNN.str
+as raw sectors, and puts the disc's own files (SYSTEM.CNF, the program file) in GameData/system/. The player
+also understands a sorted GameData (layout.csv); a numbered one works as it is.
+
 Saves are kept in the Saves folder (card1.mcd; a card2.mcd there is the second memory card slot).
 
 Keys
