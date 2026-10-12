@@ -1,5 +1,15 @@
 Xenogears - native build. One program, no runtime to install.
 
+HOW TO DOWNLOAD (please read): do not use the green Code > Download ZIP button.
+Three of the movie files (GameData/streams/0014.str, 4161.str and 4165.str) are too large for a normal
+download and are stored with Git LFS. A ZIP download leaves them out, and those movies will not play.
+Clone the repository instead, with Git and Git LFS installed (https://git-lfs.com):
+
+    git lfs install
+    git clone https://github.com/exyled/Xenogears-PC
+
+The clone contains everything, including the three large files.
+
 Run Xenogears.exe. The game data is in the GameData folder beside it.
 Saves are kept in the Saves folder (card1.mcd; a card2.mcd there is the second memory card slot).
 
