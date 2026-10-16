@@ -16,11 +16,6 @@ and SLUS-00669; the Japanese serials SLPS-01160 and SLPS-01161 are read as well)
    optional (without it the second half's movies are missing).
 3. Run Xenogears.exe. The game finds GameData beside it.
 
-The extracting is the program's own: it reads the disc's file index (sector 24) and its section table
-(sector 40), writes every entry to GameData/archive/NNNN.bin and the movies and sound to GameData/streams/NNNN.str
-as raw sectors, and puts the disc's own files (SYSTEM.CNF, the program file) in GameData/system/. The player
-also understands a sorted GameData (layout.csv); a numbered one works as it is.
-
 Saves are kept in the Saves folder (card1.mcd; a card2.mcd there is the second memory card slot).
 
 Keys
@@ -34,6 +29,7 @@ Keys
   Return         Start
   Tab            Select
   Esc            Quit
+  Alt+Enter      Full screen and back (XG_FULLSCREEN=1 starts in full screen)
 
 Controller
   A Cross, B Circle, X Square, Y Triangle, bumpers L1 / R1, triggers L2 / R2,
@@ -48,7 +44,9 @@ Picture
   F2   cycles the picture size 1 to 4 times (1 is the original picture)
   F3   switches the edge smoothing on and off (movies are always scaled with a cubic filter)
   If the machine cannot hold 60 frames a second, the size steps down by itself, then the edge smoothing.
-  The picture is drawn on several processor cores (all but one, at most six); the sound stays steady even at 3 or 4 times.
+  The larger picture is drawn by your graphics card (Vulkan or DirectX 12) when one is available, so even 4 times is
+  smooth; if no card can be opened it is drawn on several processor cores instead (all but one, at most six).
+  Set the environment variable XG_GPU=0 to force the processor drawing.
   From a command line: Xenogears.exe --res 2 --filter 1 --aa 1
 
 On the title screen three more entries sit to the right of New Game, Continue and Sound: size (x1 to x4),
@@ -58,3 +56,23 @@ change the setting, Left or Circle to go back. The choices are kept in Saves\pic
 Starting a new game: at the title menu choose New Game with the arrows and Cross.
 
 Future versions would include graphical upgrades (IE a remaster) and then integrating the lost sections of the second disc. However, I'm fully willing to let someone else do that as well.
+
+
+Changes since the last upload
+  Native code: the game's own program is now translated to native code (3,783 functions, each checked against the
+  interpreter), and the main memory areas run natively; far fewer interpreted instructions per frame.
+  Window program: no console box, a program icon and version information, statically linked (nothing to install),
+  saves beside the game or in %APPDATA%\Xenogears\Saves, key remapping in the settings screen (F12), and Alt+Enter for
+  full screen and back (XG_FULLSCREEN=1 starts in full screen).
+  Widescreen: battle, world map and arena scenes can be drawn in real 16:9 (F6) instead of stretched; the interface keeps
+  its size in the middle. Everything else is unchanged.
+  Picture: FSR upscaling, frame blending, CRT look and colour options in the settings screen; texture filtering and
+  movie scaling improved.
+  Textures: pages can be replaced by 8x versions placed in TextureReplace (loaded in the background, so no stalls).
+  Movies: a faster built-in picture decoder; replacement movie packs are shown when present.
+  Stability: the program writes Saves\crash.state, Saves\game-log.txt and freeze-report.txt when it ends unexpectedly;
+  long random-play runs (24 of 70,000 frames) all finished cleanly.
+  Setup: install.ps1 installs the player for the current user (optional data, Start-menu shortcut, uninstall.ps1);
+  package.ps1 builds a ready-to-run folder and a source zip.
+  Source: the player's source is in the source folder. A macOS build is made by the "macOS build" action (Actions tab,
+  Run workflow); it produces one file that runs on Apple Silicon and Intel, and is not yet tested on a Mac.

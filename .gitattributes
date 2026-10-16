@@ -1,0 +1,6 @@
+GameData/streams/4161.str filter=lfs diff=lfs merge=lfs -text
+GameData/streams/0014.str filter=lfs diff=lfs merge=lfs -text
+GameData/streams/4165.str filter=lfs diff=lfs merge=lfs -text
+source/** text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf

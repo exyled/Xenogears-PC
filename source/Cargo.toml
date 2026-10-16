@@ -1,0 +1,31 @@
+[package]
+name = "xenogears"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+minifb = "0.27"
+cpal = "0.15"
+gilrs = "0.10"
+xgblocks = { path = "blocks" }
+xgdec = { path = "decomp" }
+wgpu = { version = "22", default-features = false, features = ["wgsl", "dx12", "vulkan-portability"] }
+pollster = "0.3"
+bytemuck = { version = "1", features = ["derive"] }
+
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 1
+panic = "abort"
+debug = false
+overflow-checks = false
+
+# the generated blocks: split over several compile units so that they build in parallel
+[profile.release.package.xgblocks]
+opt-level = 3
+codegen-units = 16
+
+[profile.release.package.xgdec]
+opt-level = 2
+codegen-units = 16

@@ -1,0 +1,63 @@
+{
+ "_comment": "structures behind pointer globals: global = address of the pointer, kind array (records) or ptr; fields offset(hex) -> name; ptrs offset -> struct the field points at. Only what the code or the findings show.",
+ "script_ctx": {
+  "global": "800B0078",
+  "global_name": "SCRIPT_CTX",
+  "kind": "ptr",
+  "fields": {
+   "CC": "PC",
+   "20": "X",
+   "24": "Y",
+   "28": "Z",
+   "22": "X_HI",
+   "26": "Y_HI",
+   "2A": "Z_HI"
+  }
+ },
+ "entity": {
+  "global": "800AFB10",
+  "global_name": "ENTITY_ARRAY",
+  "kind": "array",
+  "fields": {
+   "4C": "OBJ"
+  },
+  "ptrs": {
+   "4C": "entity_obj"
+  },
+  "relocate": "90000000"
+ },
+ "entity_obj": {
+  "fields": {
+   "20": "X",
+   "24": "Y",
+   "28": "Z",
+   "CC": "PC",
+   "22": "X_HI",
+   "26": "Y_HI",
+   "2A": "Z_HI"
+  },
+  "alloc": {
+   "function": "80080F44",
+   "ret": "80080F90"
+  }
+ },
+ "gfx_ctx": {
+  "global": "800625A0",
+  "global_name": "GFX_CTX",
+  "kind": "ptr",
+  "fields": {}
+ },
+ "_state_block": {
+  "lo": "8004F000",
+  "size": "20000",
+  "guest": "92000000"
+ },
+ "script_buf": {
+  "fields": {},
+  "alloc": {
+   "function": "80070CC8",
+   "ret": "80071090",
+   "kind": 2
+  }
+ }
+}
