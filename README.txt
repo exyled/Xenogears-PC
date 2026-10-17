@@ -76,3 +76,5 @@ Changes since the last upload
   package.ps1 builds a ready-to-run folder and a source zip.
   Source: the player's source is in the source folder. A macOS build is made by the "macOS build" action (Actions tab,
   Run workflow); it produces one file that runs on Apple Silicon and Intel, and is not yet tested on a Mac.
+
+  Texture samples: TextureReplace holds three sample 8x pages and a note on the file format; the full set is not uploaded.
